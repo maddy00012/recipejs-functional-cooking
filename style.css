@@ -181,3 +181,261 @@ main {
         width: 100%;
     }
 }
+
+/* Card Actions (Toggle Buttons) */
+.card-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: #e9ecef;
+    border-color: #667eea;
+}
+
+.toggle-btn:active {
+    transform: scale(0.98);
+}
+
+/* Ingredients Container */
+.ingredients-container {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.ingredients-container.active {
+    display: block;
+}
+
+.ingredients-container h4 {
+    color: #667eea;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.ingredients-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients-container li {
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.ingredients-container li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+/* Steps Container */
+.steps-container {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f0f8ff;
+    border-radius: 8px;
+}
+
+.steps-container.active {
+    display: block;
+}
+
+.steps-container h4 {
+    color: #667eea;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+/* Steps List */
+.steps-list {
+    list-style: none;
+    counter-reset: step-counter;
+    padding: 0;
+}
+
+.steps-list > li {
+    counter-increment: step-counter;
+    padding: 0.6rem 0;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.steps-list > li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #667eea;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Nested substeps */
+.substeps-list {
+    /* TODO: Add styles for nested list */
+    list-style: none;
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    border-left: 2px solid #667eea;
+}
+
+.substeps-list li {
+    padding: 0.4rem 0;
+    padding-left: 1rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.substeps-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+}
+
+/* Even deeper nesting */
+.substeps-list .substeps-list {
+    border-left-color: #9aa5ea;
+    padding-left: 1rem;
+}
+
+.substeps-list .substeps-list li {
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   PART 3: EXPANDABLE SECTIONS
+   ============================================ */
+
+/* Toggle Buttons (Show Steps / Show Ingredients) */
+.toggle-btn {
+    margin-top: 0.75rem;
+    margin-right: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid #667eea;
+    background: #f8f9ff;
+    color: #667eea;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.toggle-btn:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Hidden by default */
+.steps-container,
+.ingredients-container {
+    display: none;
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #eee;
+}
+
+/* Visible state */
+.steps-container.visible,
+.ingredients-container.visible {
+    display: block;
+}
+
+/* Section Titles */
+.steps-container h4,
+.ingredients-container h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Ingredients List */
+.ingredients-container ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+}
+
+.ingredients-container li {
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    color: #555;
+}
+
+/* ============================================
+   RECURSIVE STEPS STYLING
+   ============================================ */
+
+/* Base steps list */
+.steps-container ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Top-level steps */
+.steps-level-0 > li {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Nested steps */
+.steps-level-1,
+.steps-level-2,
+.steps-level-3 {
+    margin-top: 0.4rem;
+    margin-left: 1.2rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid #e0e0e0;
+}
+
+/* Arrow before nested steps */
+.steps-level-1 li::before,
+.steps-level-2 li::before,
+.steps-level-3 li::before {
+    content: "➤ ";
+    color: #667eea;
+    font-size: 0.75rem;
+}
+
+/* Deeper levels = lighter text */
+.steps-level-2 li {
+    color: #666;
+}
+
+.steps-level-3 li {
+    color: #777;
+}
+
+/* Smooth visual spacing */
+.steps-container li {
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
